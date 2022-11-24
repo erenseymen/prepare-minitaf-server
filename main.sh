@@ -61,6 +61,7 @@ setcap cap_net_raw,cap_net_admin=eip /usr/bin/tcpdump
 echo "***** Allow nethogs for all users *****"
 setcap "cap_net_admin,cap_net_raw=ep" /usr/sbin/nethogs
 
-read -p "!!! Press enter to REBOOT !!!"
+echo "*****************************************"
+echo "!!! If all things done, please REBOOT !!!"
+echo "*****************************************"
 
-reboot
