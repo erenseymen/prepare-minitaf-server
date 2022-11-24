@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Add LINEs if not exist to /etc/profile file
+FILE_NAME="/etc/profile"
+LINE='JRE_HOME=/usr/local/java/jre_latest'
+grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
+LINE='PATH=$PATH:$JRE_HOME/bin'
+grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
+LINE='export JRE_HOME'
+grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
+LINE='GRADLE_HOME=/opt/gradle/gradle_latest'
+grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
+LINE='PATH=$PATH:$GRADLE_HOME/bin'
+grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
+LINE='export GRADLE_HOME'
+grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
+LINE='export PATH'
+grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
+. /etc/profile
+
+
+echo "JRE deploying..."
+echo BEFORE
+java -version > /tmp/java-version-output 2>&1
+grep "java version" /tmp/java-version-output
+
+echo Updating...
+
+mkdir -p /usr/local/java
+rm -rf /usr/local/java/jre*
+tar -zxf "$1" --directory /usr/local/java/
+chown -R root:root /usr/local/java/jre*
+mv /usr/local/java/jre* /usr/local/java/jre_latest
+sed -i '/SHA1 usage SignedJAR & denyAfter 2019-01-01\|SHA1 denyAfter 2019-01-01/d' /usr/local/java/jre_latest/lib/security/java.security
+
+update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jre_latest/bin/java" 1
+update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/java/jre_latest/bin/javaws" 1
+update-alternatives --set java /usr/local/java/jre_latest/bin/java
+update-alternatives --set javaws /usr/local/java/jre_latest/bin/javaws
+
+echo AFTER
+java -version > /tmp/java-version-output 2>&1
+grep "java version" /tmp/java-version-output
+
+
+echo "Gradle deploying..."
+echo BEFORE
+gradle -v
+
+echo Updating...
+
+mkdir -p /opt/gradle
+rm -rf /opt/gradle/gradle*
+unzip -d /opt/gradle "$2" > /dev/null 2>&1
+chown -R root:root /opt/gradle/gradle*
+mv /opt/gradle/gradle* /opt/gradle/gradle_latest
+
+echo AFTER
+gradle -v
+
+
+echo "mcfly deploying..."
+mkdir -p /usr/local/bin
+cp "$3" /usr/local/bin/mcfly
+
