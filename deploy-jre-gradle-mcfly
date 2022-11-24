@@ -24,8 +24,6 @@ echo BEFORE
 java -version > /tmp/java-version-output 2>&1
 grep "java version" /tmp/java-version-output
 
-echo Updating...
-
 mkdir -p /usr/local/java
 rm -rf /usr/local/java/jre*
 tar -zxf "$1" --directory /usr/local/java/
@@ -45,9 +43,8 @@ grep "java version" /tmp/java-version-output
 
 echo "Gradle deploying..."
 echo BEFORE
-gradle -v
-
-echo Updating...
+gradle -v > /tmp/gradle-version-output 2>&1
+grep "Gradle " /tmp/gradle-version-output
 
 mkdir -p /opt/gradle
 rm -rf /opt/gradle/gradle*
@@ -56,7 +53,8 @@ chown -R root:root /opt/gradle/gradle*
 mv /opt/gradle/gradle* /opt/gradle/gradle_latest
 
 echo AFTER
-gradle -v
+gradle -v > /tmp/gradle-version-output 2>&1
+grep "Gradle " /tmp/gradle-version-output
 
 
 echo "mcfly deploying..."
