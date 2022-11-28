@@ -68,7 +68,3 @@ sed -i 's/^session    optional     pam_motd\.so noupdate/# session    optional  
 echo "***** Add mtaf user *****"
 adduser mtaf
 
-echo "*****************************************"
-echo "!!! If all things done, please REBOOT !!!"
-echo "*****************************************"
-
