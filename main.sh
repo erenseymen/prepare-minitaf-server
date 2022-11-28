@@ -65,6 +65,9 @@ echo "***** Disable ssh login banner *****"
 sed -i 's/^session    optional     pam_motd\.so  motd=\/run\/motd\.dynamic/# session    optional     pam_motd\.so  motd=\/run\/motd\.dynamic/' /etc/pam.d/sshd
 sed -i 's/^session    optional     pam_motd\.so noupdate/# session    optional     pam_motd\.so noupdate/' /etc/pam.d/sshd
 
+echo "***** Add mtaf user *****"
+adduser mtaf
+
 echo "*****************************************"
 echo "!!! If all things done, please REBOOT !!!"
 echo "*****************************************"
