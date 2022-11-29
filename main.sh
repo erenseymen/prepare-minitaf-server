@@ -72,3 +72,6 @@ adduser mtaf
 echo "crontab setup"
 crontab crontab
 
+echo "deploy cleanup_minitafs_old_sesm_logs.sh"
+cp cleanup_minitafs_old_sesm_logs.sh /home/
+
