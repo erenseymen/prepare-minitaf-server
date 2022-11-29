@@ -70,6 +70,5 @@ echo "***** Add mtaf user *****"
 adduser mtaf
 
 echo "crontab setup"
-mkdir -p /var/spool/cron/crontabs
-cp crontab /var/spool/cron/crontabs/root
+crontab crontab
 
