@@ -1,1 +1,1 @@
-* * * * * /root/prepare-minitaf-server/weekly-maintenance.sh
+0 0 * * 0 /root/prepare-minitaf-server/weekly-maintenance.sh
