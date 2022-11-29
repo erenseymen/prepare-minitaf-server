@@ -11,7 +11,7 @@ apt install -y unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump
 echo "***** Purge: unattended-upgrades snapd apport ufw *****"
 apt purge -y unattended-upgrades snapd apport ufw
 echo "***** Cleanup packages *****"
-apt autoremove --purge -y
+apt autoremove --purge
 
 echo "***** Clean snap dirs and prevent snap to be reinstalled *****"
 rm -rf /snap /var/snap /var/lib/snapd /var/cache/snapd /usr/lib/snapd ~/snap
