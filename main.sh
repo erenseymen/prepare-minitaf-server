@@ -69,6 +69,9 @@ sed -i 's/^session    optional     pam_motd\.so noupdate/# session    optional  
 echo "***** Add mtaf user *****"
 adduser mtaf
 
+echo "***** Add jenkins user *****"
+adduser jenkins
+
 echo "***** deploy cleanup_minitafs_old_sesm_logs.sh *****"
 cp cleanup_minitafs_old_sesm_logs.sh /home/
 
