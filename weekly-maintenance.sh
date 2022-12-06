@@ -8,6 +8,9 @@ mkdir -p /root/logs
 
 {
 
+echo "***** Size of the disk before maintenance: *****"
+df -h | grep "/$"
+
 echo "***** Size of the /home folder before maintenance (KB): *****"
 BEFORE_SIZE=$(du -s /home | awk '{print $1}')
 echo $BEFORE_SIZE
@@ -29,5 +32,8 @@ echo $AFTER_SIZE
 
 echo "***** Disk space saved after maintenance (KB): *****"
 expr $BEFORE_SIZE - $AFTER_SIZE
+
+echo "***** Size of the disk after maintenance: *****"
+df -h | grep "/$"
 
 } 2>&1 | tee /root/logs/weekly-maintenance-$(date +"%Y-%m-%d_%H-%M-%S").log
