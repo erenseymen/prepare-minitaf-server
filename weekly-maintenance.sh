@@ -20,8 +20,10 @@ rm -rf /home/*/a2-test*/test/*/log
 rm -rf /home/*/a2-test*/build/test-results
 
 echo "***** Cleanup old SESM logs *****"
+cp /root/prepare-minitaf-server/cleanup_minitafs_old_sesm_logs.sh /home/
 cd /home
 ./cleanup_minitafs_old_sesm_logs.sh
+rm -rf /home/cleanup_minitafs_old_sesm_logs.sh
 
 echo "***** Compressing SESM logs *****"
 gzip -r --fast /home/*/a2-test*/build/ServiceTraces/

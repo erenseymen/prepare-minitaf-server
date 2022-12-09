@@ -72,9 +72,6 @@ adduser mtaf
 echo "***** Add jenkins user *****"
 adduser jenkins
 
-echo "***** deploy cleanup_minitafs_old_sesm_logs.sh *****"
-cp cleanup_minitafs_old_sesm_logs.sh /home/
-
 echo "***** crontab setup *****"
 crontab crontab
 
