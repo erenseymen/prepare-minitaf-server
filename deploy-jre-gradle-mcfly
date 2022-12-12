@@ -2,7 +2,7 @@
 
 # This script deploys JRE, Gradle and mcfly
 # Run as below
-# deploy-jre-gradle-mcfly jre-8u351-linux-x64.tar.gz gradle-4.10.2-bin.zip mcfly
+# deploy-jre-gradle-mcfly jre-8u351-linux-x64.tar.gz gradle-4.10.2-bin.zip
 # Author: Eren Seymen (eren.seymen@orioninc.com)
 
 # Add LINEs if not exist to /etc/profile file
@@ -64,5 +64,5 @@ grep "Gradle " /tmp/gradle-version-output
 
 echo "mcfly deploying..."
 mkdir -p /usr/local/bin
-cp "$3" /usr/local/bin/mcfly
+ln -s $(pwd)/mcfly /usr/local/bin/mcfly
 

@@ -30,7 +30,7 @@ sed -i 's/APT::Periodic::Download-Upgradeable-Packages "1"/APT::Periodic::Downlo
 sed -i 's/APT::Periodic::AutocleanInterval "1"/APT::Periodic::AutocleanInterval "0"/' /etc/apt/apt.conf.d/10periodic
 
 echo "***** Deploy JRE, Gradle and mcfly *****"
-./deploy-jre-gradle-mcfly "$1" "$2" "$3"
+./deploy-jre-gradle-mcfly "$1" "$2"
 
 echo "***** Add system level aliases *****"
 # Add LINEs if not exist to /etc/profile file
