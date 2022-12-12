@@ -64,5 +64,5 @@ grep "Gradle " /tmp/gradle-version-output
 
 echo "mcfly deploying..."
 mkdir -p /usr/local/bin
-ln -s $(pwd)/mcfly /usr/local/bin/mcfly
+cp mcfly /usr/local/bin/mcfly
 
