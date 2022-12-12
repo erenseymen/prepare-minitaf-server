@@ -29,8 +29,8 @@ sed -i 's/APT::Periodic::Update-Package-Lists "1"/APT::Periodic::Update-Package-
 sed -i 's/APT::Periodic::Download-Upgradeable-Packages "1"/APT::Periodic::Download-Upgradeable-Packages "0"/' /etc/apt/apt.conf.d/10periodic
 sed -i 's/APT::Periodic::AutocleanInterval "1"/APT::Periodic::AutocleanInterval "0"/' /etc/apt/apt.conf.d/10periodic
 
-echo "***** Deploy JRE, Gradle and mcfly *****"
-./deploy-jre-gradle-mcfly "$1" "$2"
+echo "***** Deploy JRE and Gradle *****"
+./deploy-jre-gradle "$1" "$2"
 
 echo "***** Add system level aliases *****"
 # Add LINEs if not exist to /etc/profile file
@@ -52,8 +52,6 @@ grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 LINE='alias cheat="tldr"'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 LINE='alias ?="compgen -c | grep"'
-grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
-LINE='eval "$(mcfly init bash)"'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 
 echo "***** Allow tcpdump for all users *****"
