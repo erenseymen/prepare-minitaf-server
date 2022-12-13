@@ -6,8 +6,8 @@
 
 echo "***** Install and remove packages *****"
 apt update
-echo "***** Install: unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect ncdu *****"
-apt install -y unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect ncdu
+echo "***** Install: unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu *****"
+apt install -y unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu
 echo "***** Purge: unattended-upgrades snapd apport ufw *****"
 apt purge -y unattended-upgrades snapd apport ufw
 echo "***** Cleanup packages *****"
