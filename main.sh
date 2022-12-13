@@ -20,9 +20,10 @@ mv no-snap.pref /etc/apt/preferences.d/
 chown root:root /etc/apt/preferences.d/no-snap.pref
 apt install --reinstall ca-certificates -y
 
-echo "***** Upgrade packages *****"
+echo "***** Upgrade packages and clean *****"
 apt full-upgrade
 apt autoremove --purge
+apt clean
 
 echo "***** Disable apt automatic update *****"
 sed -i 's/APT::Periodic::Update-Package-Lists "1"/APT::Periodic::Update-Package-Lists "0"/' /etc/apt/apt.conf.d/10periodic
