@@ -15,6 +15,9 @@ echo "***** Size of the /home folder before maintenance (KB): *****"
 BEFORE_SIZE=$(du -s /home | awk '{print $1}')
 echo $BEFORE_SIZE
 
+echo "***** Cleanup old VSCode Server binaries *****"
+/root/prepare-minitaf-server/cleanup_old_vscode_server_binaries.sh
+
 echo "***** Cleanup minitaf's useless logs *****"
 rm -rf /home/*/a2-test*/test/*/log
 rm -rf /home/*/a2-test*/build/test-results
