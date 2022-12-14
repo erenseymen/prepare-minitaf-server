@@ -74,3 +74,7 @@ adduser jenkins
 echo "***** crontab setup *****"
 crontab crontab
 
+echo "***** Remove cache etc. for root user *****"
+rm -rf /root/.gradle
+rm -rf /root/.cache
+
