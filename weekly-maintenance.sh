@@ -16,7 +16,10 @@ BEFORE_SIZE=$(du -s /home | awk '{print $1}')
 echo $BEFORE_SIZE
 
 echo "***** Cleanup old VSCode Server binaries *****"
-/root/prepare-minitaf-server/cleanup_old_vscode_server_binaries.sh
+cp /root/prepare-minitaf-server/cleanup_old_vscode_server_binaries.sh /home/
+cd /home
+./cleanup_old_vscode_server_binaries.sh
+rm -rf /home/cleanup_old_vscode_server_binaries.sh
 
 echo "***** Cleanup minitaf's useless logs *****"
 rm -rf /home/*/a2-test*/test/*/log
