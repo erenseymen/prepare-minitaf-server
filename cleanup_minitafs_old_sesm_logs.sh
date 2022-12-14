@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script recursively searches for "a2-test*/build/ServiceTraces" folders under the current directory. Under the found folders, the script will keep 10 newest SUCCESS and 10 newest FAILED logs for each TC and delete the others.
+# This script recursively searches for "*/a2-test*/build/ServiceTraces" folders under the current directory. Under the found folders, the script will keep 10 newest SUCCESS and 10 newest FAILED logs for each TC and delete the others.
 # Author: Eren Seymen (eren.seymen@orioninc.com)
 
 find "$(pwd)" -type d -wholename "*/a2-test*/build/ServiceTraces" | while read -r SERVICETRACES_DIR; do
