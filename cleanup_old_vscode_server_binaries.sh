@@ -5,5 +5,5 @@
 
 find "/home" -type d -wholename "/home/*/.vscode-server/bin" | while read -r VSCODE_SERVER_BIN_DIR; do
     echo "Cleaning up $VSCODE_SERVER_BIN_DIR"
-    ls -tp 2> /dev/null | grep '/$' | tail -n +2 | xargs -d '\n' -r rm -rf --
+    ls -tp "$VSCODE_SERVER_BIN_DIR" 2> /dev/null | grep '/$' | tail -n +2 | xargs -d '\n' -r rm -rf --
 done
