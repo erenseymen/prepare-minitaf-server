@@ -6,8 +6,8 @@
 
 echo "***** Install and remove packages *****"
 apt update
-echo "***** Install: unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils *****"
-apt install -y unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils
+echo "***** Install: unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck *****"
+apt install -y unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck
 echo "***** Purge: unattended-upgrades snapd apport ufw *****"
 apt purge -y unattended-upgrades snapd apport ufw
 echo "***** Cleanup packages *****"
@@ -53,6 +53,8 @@ grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 LINE='alias cheat="tldr"'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 LINE='alias ?="compgen -c | grep"'
+grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
+LINE='eval $(thefuck --alias)'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 
 echo "***** Allow tcpdump for all users *****"
