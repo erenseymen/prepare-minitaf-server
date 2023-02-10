@@ -36,21 +36,9 @@ echo "***** Deploy JRE and Gradle *****"
 echo "***** Add system level aliases *****"
 # Add LINEs if not exist to /etc/profile file
 FILE_NAME="/etc/profile"
-LINE='alias enable="systemctl enable"'
-grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
-LINE='alias disable="systemctl disable"'
-grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
-LINE='alias start="systemctl start"'
-grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
-LINE='alias stop="systemctl stop"'
-grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
-LINE='alias list="systemctl -a list-units | grep -i"'
-grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 LINE='alias c="rsync -a --info=progress2"'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 LINE='alias ubuntu-release="lsb_release -a"'
-grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
-LINE='alias cheat="tldr"'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 LINE='alias ?="compgen -c | grep"'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
