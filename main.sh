@@ -4,6 +4,9 @@
 # Please run run.sh instead of running this
 # Author: Eren Seymen (eren.seymen@orioninc.com)
 
+echo "***** Set timezone (Turkey) *****"
+timedatectl set-timezone Turkey
+
 echo "***** Install and remove packages *****"
 apt update
 echo "***** Install: unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck *****"
