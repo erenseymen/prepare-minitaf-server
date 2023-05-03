@@ -2,7 +2,7 @@
 
 # This script deploys JDK, Gradle
 # Run as below
-# ./deploy-jdk-gradle jdk-8u371-linux-x64.tar.gz gradle-4.10.2-bin.zip
+# ./deploy-jdk-gradle jdk-8u371-linux-x64.7z gradle-4.10.2-bin.zip
 # Author: Eren Seymen (eren.seymen@orioninc.com)
 
 # Add LINEs if not exist to /etc/profile file
@@ -35,7 +35,7 @@ grep "java version" /tmp/java-version-output
 
 mkdir -p /usr/local/java
 rm -rf /usr/local/java/jdk*
-tar -zxf "$1" --directory /usr/local/java/
+7z x "$1" -o/usr/local/java/
 chown -R root:root /usr/local/java/jdk*
 mv /usr/local/java/jdk* /usr/local/java/jdk_latest
 sed -i '/SHA1 usage SignedJAR & denyAfter 2019-01-01\|SHA1 denyAfter 2019-01-01/d' /usr/local/java/jdk_latest/jre/lib/security/java.security
