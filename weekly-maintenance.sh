@@ -12,8 +12,16 @@ echo "***** Size of the disk before maintenance: *****"
 df -h | grep "/$"
 
 echo "***** Size of the /home folder before maintenance (KB): *****"
-BEFORE_SIZE=$(du -s /home | awk '{print $1}')
-echo $BEFORE_SIZE
+BEFORE_SIZE_home=$(du -s /home | awk '{print $1}')
+echo $BEFORE_SIZE_home
+
+echo "***** Size of the /var/lib/Jenkins/workspace folder before maintenance (KB): *****"
+BEFORE_SIZE_Jenkins=$(du -s /var/lib/Jenkins/workspace | awk '{print $1}')
+echo $BEFORE_SIZE_Jenkins
+
+echo "***** Size of the /var/lib/jenkins/workspace folder before maintenance (KB): *****"
+BEFORE_SIZE_jenkins=$(du -s /var/lib/jenkins/workspace | awk '{print $1}')
+echo $BEFORE_SIZE_jenkins
 
 echo "***** Cleanup old VSCode Server binaries *****"
 cp /root/prepare-minitaf-server/cleanup_old_vscode_server_binaries.sh /home/
@@ -31,15 +39,38 @@ cd /home
 ./cleanup_minitafs_old_sesm_logs.sh
 rm -rf /home/cleanup_minitafs_old_sesm_logs.sh
 
-echo "***** Compressing SESM logs *****"
-gzip -r --fast /home/*/a2-test*/build/ServiceTraces/
+echo "***** Cleanup old SESM logs (Jenkins folder) *****"
+cp /root/prepare-minitaf-server/cleanup_minitafs_old_sesm_logs.sh /var/lib/Jenkins/workspace/
+cd /var/lib/Jenkins/workspace
+./cleanup_minitafs_old_sesm_logs.sh
+rm -rf /var/lib/Jenkins/workspace/cleanup_minitafs_old_sesm_logs.sh
+
+echo "***** Cleanup old SESM logs (jenkins folder) *****"
+cp /root/prepare-minitaf-server/cleanup_minitafs_old_sesm_logs.sh /var/lib/jenkins/workspace/
+cd /var/lib/jenkins/workspace
+./cleanup_minitafs_old_sesm_logs.sh
+rm -rf /var/lib/jenkins/workspace/cleanup_minitafs_old_sesm_logs.sh
 
 echo "***** Size of the /home folder after maintenance (KB): *****"
-AFTER_SIZE=$(du -s /home | awk '{print $1}')
-echo $AFTER_SIZE
+AFTER_SIZE_home=$(du -s /home | awk '{print $1}')
+echo $AFTER_SIZE_home
 
-echo "***** Disk space saved after maintenance (KB): *****"
-expr $BEFORE_SIZE - $AFTER_SIZE
+echo "***** Size of the /var/lib/Jenkins/workspace folder after maintenance (KB): *****"
+AFTER_SIZE_Jenkins=$(du -s /var/lib/Jenkins/workspace | awk '{print $1}')
+echo $AFTER_SIZE_Jenkins
+
+echo "***** Size of the /var/lib/jenkins/workspace folder after maintenance (KB): *****"
+AFTER_SIZE_jenkins=$(du -s /var/lib/jenkins/workspace | awk '{print $1}')
+echo $AFTER_SIZE_jenkins
+
+echo "***** Disk space saved after maintenance (KB) in /home folder: *****"
+expr $BEFORE_SIZE_home - $AFTER_SIZE_home
+
+echo "***** Disk space saved after maintenance (KB) in /var/lib/Jenkins/workspace folder: *****"
+expr $BEFORE_SIZE_Jenkins - $AFTER_SIZE_Jenkins
+
+echo "***** Disk space saved after maintenance (KB) in /var/lib/jenkins/workspace folder: *****"
+expr $BEFORE_SIZE_jenkins - $AFTER_SIZE_jenkins
 
 echo "***** Size of the disk after maintenance: *****"
 df -h | grep "/$"

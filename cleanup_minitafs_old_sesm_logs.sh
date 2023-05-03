@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script recursively searches for "*/a2-test*/build/ServiceTraces" folders under the current directory. Under the found folders, the script will keep 10 newest SUCCESS and 10 newest FAILED logs for each TC and delete the others.
+# This script recursively searches for "*/a2-test*/build/ServiceTraces" folders under the current directory. Under the found folders, the script will keep 10 newest SUCCESS and 10 newest FAILED logs for each TC and delete the others. It will compress remaining logs with gzip.
 # Author: Eren Seymen (eren.seymen@orioninc.com)
 
 find "$(pwd)" -type d -wholename "*/a2-test*/build/ServiceTraces" | while read -r SERVICETRACES_DIR; do
@@ -9,4 +9,5 @@ find "$(pwd)" -type d -wholename "*/a2-test*/build/ServiceTraces" | while read -
         ls -tp "$TESTCASE_DIR"SUCCESS_* 2> /dev/null | grep -v '/$' | tail -n +11 | xargs -d '\n' -r rm --
         ls -tp "$TESTCASE_DIR"FAILED_* 2> /dev/null | grep -v '/$' | tail -n +11 | xargs -d '\n' -r rm --
     done
+    gzip -r --fast $SERVICETRACES_DIR
 done
