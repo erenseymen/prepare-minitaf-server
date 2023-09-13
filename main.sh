@@ -9,8 +9,8 @@ timedatectl set-timezone Turkey
 
 echo "***** Install and remove packages *****"
 apt update
-echo "***** Install: unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck mosh *****"
-apt install -y unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck mosh
+echo "***** Install: unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck mosh ncat *****"
+apt install -y unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck mosh ncat
 echo "***** Purge: unattended-upgrades snapd apport ufw *****"
 apt purge -y unattended-upgrades snapd apport ufw
 echo "***** Cleanup packages *****"
