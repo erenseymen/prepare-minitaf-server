@@ -2,20 +2,16 @@
 
 # This script deploys JDK, Gradle
 # Run as below
-# ./deploy-jdk-gradle jdk-8u371-linux-x64.7z gradle-4.10.2-bin.zip
+# ./deploy-jdk-gradle gradle-4.10.2-bin.zip
 # Author: Eren Seymen (eren.seymen@orioninc.com)
 
 # Add LINEs if not exist to /etc/profile file
 FILE_NAME="/etc/profile"
-LINE='JAVA_HOME=/usr/local/java/jdk_latest'
+LINE='JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
-LINE='JRE_HOME=$JAVA_HOME/jre'
-grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
-LINE='PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin'
+LINE='PATH=$PATH:$JAVA_HOME/bin'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 LINE='export JAVA_HOME'
-grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
-LINE='export JRE_HOME'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 LINE='GRADLE_HOME=/opt/gradle/gradle_latest'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
@@ -28,28 +24,6 @@ grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 . /etc/profile
 
 
-echo "JDK deploying..."
-echo BEFORE
-java -version > /tmp/java-version-output 2>&1
-grep "java version" /tmp/java-version-output
-
-mkdir -p /usr/local/java
-rm -rf /usr/local/java/jdk*
-7z x "$1" -o/usr/local/java/
-chown -R root:root /usr/local/java/jdk*
-mv /usr/local/java/jdk* /usr/local/java/jdk_latest
-sed -i '/SHA1 usage SignedJAR & denyAfter 2019-01-01\|SHA1 denyAfter 2019-01-01/d' /usr/local/java/jdk_latest/jre/lib/security/java.security
-
-update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jdk_latest/jre/bin/java" 1
-update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/java/jdk_latest/jre/bin/javaws" 1
-update-alternatives --set java /usr/local/java/jdk_latest/jre/bin/java
-update-alternatives --set javaws /usr/local/java/jdk_latest/jre/bin/javaws
-
-echo AFTER
-java -version > /tmp/java-version-output 2>&1
-grep "java version" /tmp/java-version-output
-
-
 echo "Gradle deploying..."
 echo BEFORE
 gradle -v > /tmp/gradle-version-output 2>&1
@@ -57,7 +31,7 @@ grep "Gradle " /tmp/gradle-version-output
 
 mkdir -p /opt/gradle
 rm -rf /opt/gradle/gradle*
-unzip -d /opt/gradle "$2" > /dev/null 2>&1
+unzip -d /opt/gradle "$1" > /dev/null 2>&1
 chown -R root:root /opt/gradle/gradle*
 mv /opt/gradle/gradle* /opt/gradle/gradle_latest
 
