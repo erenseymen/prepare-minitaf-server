@@ -35,8 +35,7 @@ mkdir -p /usr/local/java
 rm -rf /usr/local/java/jdk*
 7z x jdk-8u371-linux-x64.7z -o/usr/local/java/
 chown -R root:root /usr/local/java/jdk*
-mv /usr/local/java/jdk* /usr/local/java/jdk-8u371
-ln -s /usr/local/java/jdk-8u371 /usr/local/java/jdk_system
+ln -s /usr/local/java/jdk* /usr/local/java/jdk_system
 sed -i '/SHA1 usage SignedJAR & denyAfter 2019-01-01\|SHA1 denyAfter 2019-01-01/d' /usr/local/java/jdk_system/jre/lib/security/java.security
 
 update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jdk_system/jre/bin/java" 1
@@ -58,8 +57,7 @@ mkdir -p /opt/gradle
 rm -rf /opt/gradle/gradle*
 unzip -d /opt/gradle gradle-4.10.2-bin.zip > /dev/null 2>&1
 chown -R root:root /opt/gradle/gradle*
-mv /opt/gradle/gradle* /opt/gradle/gradle-4.10.2
-ln -s /opt/gradle/gradle-4.10.2 /opt/gradle/gradle_system
+ln -s /opt/gradle/gradle* /opt/gradle/gradle_system
 
 echo AFTER
 gradle -v > /tmp/gradle-version-output 2>&1
