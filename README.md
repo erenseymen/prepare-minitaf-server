@@ -11,7 +11,7 @@ As root user under /root/ directory run below commands
 ```console
 git clone https://github.com/erenseymen/prepare-minitaf-server
 cd prepare-minitaf-server
-./run.sh
+./main.sh
 ```
 
 Run below command:

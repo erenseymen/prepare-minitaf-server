@@ -34,7 +34,7 @@ sed -i 's/APT::Periodic::Download-Upgradeable-Packages "1"/APT::Periodic::Downlo
 sed -i 's/APT::Periodic::AutocleanInterval "1"/APT::Periodic::AutocleanInterval "0"/' /etc/apt/apt.conf.d/10periodic
 
 echo "***** Deploy JDK and Gradle *****"
-./deploy-jdk-gradle "$1" "$2"
+./deploy-jdk-gradle
 
 echo "***** Add system level aliases *****"
 # Add LINEs if not exist to /etc/profile file
