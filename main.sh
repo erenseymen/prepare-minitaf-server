@@ -9,8 +9,8 @@ timedatectl set-timezone Turkey
 
 echo "***** Install and remove packages *****"
 apt update
-echo "***** Install: unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck mosh ncat *****"
-apt install -y unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck mosh ncat
+echo "***** Install: unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck mosh ncat maven *****"
+apt install -y unzip zip net-tools p7zip-full p7zip-rar tldr git nethogs tcpdump expect gdu snmp nala moreutils neofetch trash-cli thefuck mosh ncat maven
 echo "***** Purge: unattended-upgrades snapd apport ufw *****"
 apt purge -y unattended-upgrades snapd apport ufw
 echo "***** Cleanup packages *****"
@@ -22,6 +22,19 @@ printf "Package: snapd\nPin: release a=*\nPin-Priority: -10" >> no-snap.pref
 mv no-snap.pref /etc/apt/preferences.d/
 chown root:root /etc/apt/preferences.d/no-snap.pref
 apt install --reinstall ca-certificates -y
+
+echo "***** Install Google Chrome (for Selenium) *****"
+wget -O /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+apt install -y /tmp/google-chrome-stable_current_amd64.deb
+apt --fix-broken install -y
+
+echo "***** Install chromedriver (for Selenium) *****"
+CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+echo "Chrome version is $CHROME_VERSION"
+wget -O /tmp/chromedriver-linux64.zip https://storage.googleapis.com/chrome-for-testing-public/$CHROME_VERSION/linux64/chromedriver-linux64.zip
+unzip -o /tmp/chromedriver-linux64.zip -d /tmp/
+mkdir -p /usr/local/bin
+mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
 
 echo "***** Upgrade packages and clean *****"
 apt full-upgrade
