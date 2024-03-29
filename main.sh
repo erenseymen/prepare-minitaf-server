@@ -60,6 +60,8 @@ LINE='alias ?="compgen -c | grep"'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 LINE='eval $(thefuck --alias)'
 grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
+LINE='alias nano="nano -mql"'
+grep -qxF "$LINE" $FILE_NAME || echo "$LINE" >> $FILE_NAME
 
 echo "***** Allow tcpdump for all users *****"
 setcap cap_net_raw,cap_net_admin=eip /usr/bin/tcpdump
