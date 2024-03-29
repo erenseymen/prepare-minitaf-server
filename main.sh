@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script prepares minitaf server
-# Please run run.sh instead of running this
+# Run this as root ./main.sh
 # Author: Eren Seymen (eren.seymen@orioninc.com)
 
 echo "***** Set timezone (Turkey) *****"
